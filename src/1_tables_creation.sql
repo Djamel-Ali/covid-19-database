@@ -18,8 +18,10 @@ DROP TABLE IF EXISTS Sexe, Departement, Region, SexesDep, Incidence, AgesReg CAS
 
 CREATE TABLE Sexe
 (
-    idSexe INTEGER PRIMARY KEY CHECK (idSexe = 1 OR idSexe = 2),
-    sexe VARCHAR NOT NULL CHECK (sexe = 'masculin' OR sexe = 'feminin')
+    idSexe INTEGER PRIMARY KEY ,
+    sexe VARCHAR NOT NULL 
+    CHECK ((idSexe = 1 AND LOWER(sexe) = 'masculin') OR 
+           (idSexe = 2 AND LOWER(sexe) = 'feminin'))
 );
 
 \echo TABLE Sexe créée  √
