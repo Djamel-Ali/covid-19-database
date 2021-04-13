@@ -7,3 +7,5 @@
 * [pas très important] : Dans le tableaux des contraintes, l'attribut 'jour' dans les tables SexesDep, Incidence et AgesReg est normalement 'part of primary key' au lieu d'ecrire 'primary key' (à mon avis c'est mieux ... on en parlera). 
 
 * Corriger dans le tableau des contraintes : dans AgesReg, description de clAge90 n'est pas bonne. (ecrire juste classes d'age réparties par intervalles de 10 ans (ou plus pour la dernière classe ([90 ans; x ans[) par e.g.).
+
+* Ajouter le lien vers le dépôt git dans le rapport (et/ou dans le README.md)
