@@ -7,6 +7,7 @@
 \echo ...
 \echo
 DROP TABLE IF EXISTS Sexe, Departement, Region, SexesDep, Incidence, AgesReg CASCADE;
+DROP DOMAIN IF EXISTS alphanum;
 
 \echo √ fait.
 \echo
@@ -38,12 +39,14 @@ CREATE TABLE Region
 \echo TABLE Region créée  √
 \echo
 
+create domain alphanum as varchar(20) check (value ~ '^[0-9][a-zA-Z0-9]([0-9])?$'); 
 -- France d'outre-mer d'après Wikipédia (https://fr.wikipedia.org/wiki/France_d%27outre-mer)
 -- France métropolitaine d'après Wikipedia (https://fr.wikipedia.org/wiki/D%C3%A9partement_fran%C3%A7ais#Liste_des_101_circonscriptions_administratives)
 -- Et sur data-gouv.fr : https://www.data.gouv.fr/en/datasets/departements-de-france/
+-- avant alphanum : numDep INTEGER PRIMARY KEY CHECK ( (numDep BETWEEN 1 AND 95) OR (numDep BETWEEN 971 AND 989) ),
 CREATE TABLE Departement
 (
-    numDep INTEGER PRIMARY KEY CHECK ( (numDep BETWEEN 1 AND 95) OR (numDep BETWEEN 971 AND 989) ),
+    numDep alphanum PRIMARY KEY,
     nomDep VARCHAR NOT NULL,
     numReg INTEGER REFERENCES Region(numReg)
 );
@@ -54,7 +57,7 @@ CREATE TABLE Departement
 
 CREATE TABLE SexesDep
 (
-    numDep INTEGER REFERENCES Departement(numDep),
+    numDep alphanum REFERENCES Departement(numDep),
     jour DATE NOT NULL CHECK (jour <= CURRENT_DATE),
     idSexe INTEGER REFERENCES Sexe(idSexe),
     PRIMARY KEY (numDep, jour, idSexe),
@@ -73,7 +76,7 @@ CREATE TABLE SexesDep
 
 CREATE TABLE Incidence
 (
-    numDep INTEGER REFERENCES Departement(numDep),
+    numDep alphanum REFERENCES Departement(numDep),
     jour DATE NOT NULL CHECK (jour <= CURRENT_DATE),
     PRIMARY KEY (numDep, jour),
     incidHosp INTEGER NOT NULL CHECK (incidHosp >= 0),

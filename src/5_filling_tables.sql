@@ -33,13 +33,12 @@ CSV HEADER;
 \echo
 
 -- Copy from the file into a temporary table 't'
-CREATE TEMPORARY TABLE t(nuD INTEGER, noD VARCHAR, nuR INTEGER, noR VARCHAR);
+CREATE TEMPORARY TABLE t(nuD alphanum, noD VARCHAR, nuR INTEGER, noR VARCHAR);
 COPY t
 FROM '/home/djamel/covid-19_database/src/data_sources/departements-france.csv'
 CSV HEADER;
 
 -- insert into the definitive table from the temp
-
 INSERT INTO Departement(numDep, nomDep, numReg)
 SELECT nuD, noD, nuR
 FROM t;
