@@ -6,19 +6,10 @@ ___
 
 ### The steps to execute the project: 
 
-Go to the directory \
-[src](src)
-
-then type the command :
+Init database with command:
 ```sh
-$ psql
+$ psql -f init.sql
 ```
-
-In the new prompt, execute the script **0_all.sql** by running the command :
-```psql
-\i 0_all.sql
-```
-
 
 
 ### Other :

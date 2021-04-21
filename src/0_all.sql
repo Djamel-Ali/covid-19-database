@@ -1,4 +1,5 @@
 \! clear
+
 \i 1_tables_creation.sql
 \i 2_functions_creation.sql
 \i 3_trigger_functions_creation.sql
