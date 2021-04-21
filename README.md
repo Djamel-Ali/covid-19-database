@@ -6,20 +6,20 @@ ___
 
 ### The steps to execute the project: 
 
-* Go to the directory 
-> ~/covid-19_database/src/ 
+Go to the directory \
+[src](src)
 
-then type the command : 
+then type the command :
+```sh
+$ psql
+```
 
-`psql`
-
-* In the new prompt, execute the script **0_all.sql** by running the command :
-
-
-`\i 0_all.sql`
+In the new prompt, execute the script **0_all.sql** by running the command :
+```psql
+\i 0_all.sql
+```
 
 
-___
 
 ### Other :
 
@@ -27,5 +27,4 @@ ___
 
 https://gaufre.informatique.univ-paris-diderot.fr/alid/covid-19_database
 
-___
 ##### By : Djamel ALI & Jéremy DAMOUR
