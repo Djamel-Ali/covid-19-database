@@ -1,5 +1,8 @@
+import sys
+from os import system
+
 import psycopg2
-from Template import Template
+from .Template import Template
 
 
 class Psql:
@@ -10,13 +13,16 @@ class Psql:
         self.cursor = self.connection.cursor()
 
     @staticmethod
-    def get_params(config):
-        if not config.has_section():
-            raise Exception(f"No section {Psql.section_psql} in config")
+    def get_params(config) -> dict:
         return {k: v for k, v in config.items(Psql.section_psql)}
 
     def execute(self, command: str, commit: bool = False):
-        self.cursor.execute(command)
+        try:
+            self.cursor.execute(command)
+        except Exception as err:
+            print("ERROR execute:", command, sep='\n', file=sys.stderr)
+            raise err
+
         if commit:
             self.commit()
 
@@ -25,7 +31,8 @@ class Psql:
         self.execute(template.replace(**params_template), commit)
 
     def commit(self):
-        self.cursor.commit()
+        self.connection.commit()
 
     def __del__(self):
-        self.connection.close()
+        if self.connection is not None:
+            self.connection.close()

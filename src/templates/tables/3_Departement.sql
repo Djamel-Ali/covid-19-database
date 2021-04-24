@@ -1,0 +1,6 @@
+CREATE TABLE Departement
+(
+    numDep INTEGER PRIMARY KEY CHECK ( (numDep BETWEEN 1 AND 95) OR (numDep BETWEEN 971 AND 989) ),
+    nomDep VARCHAR NOT NULL,
+    numReg INTEGER REFERENCES Region(numReg)
+);
