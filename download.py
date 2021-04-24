@@ -1,19 +1,13 @@
-from bs4 import BeautifulSoup
-from argparse import ArgumentParser
-from pathlib import Path
 import requests
+from pathlib import Path
+from bs4 import BeautifulSoup
+from src import parse
 
 URL = "https://www.data.gouv.fr/fr/datasets/" \
       "donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/" \
       "#community-resources"
-
-
-def parser_arg():
-    parser = ArgumentParser()
-    parser.add_argument("directory_output")
-    args = parser.parse_args()
-    return Path(args.directory_output)
-
+SECTION_DOWNLOAD = "download"
+KEY_DIR = "output"
 
 def get_text(article):
     return article.h4.text
@@ -29,10 +23,10 @@ def get_info(article):
 
 def save(folder, name_file, url):
     rep = requests.get(url)
-    path = folder / name_file
+    path = str(folder / name_file)
     with open(path, 'w') as file:
         file.write(rep.text)
-    return str(path)
+    print("create file:", path)
 
 
 def get_infos():
@@ -51,9 +45,9 @@ def get_infos():
 
 
 if __name__ == "__main__":
-    dir_out = parser_arg()
+    config = parse()
+    dir_out = Path(config[SECTION_DOWNLOAD][KEY_DIR])
 
     infos = get_infos()
-    list_path = [save(dir_out, *info) for info in infos.values()]
-    
-    print(" ".join(list_path))
+    for info in infos.values():
+        save(dir_out, *info)

@@ -22,7 +22,7 @@ INSERT INTO Sexe(idSexe, sexe) VALUES
 \echo
 
 COPY Region(numReg , nomReg)
-FROM '/home/djamel/covid-19_database/src/data_sources/regions-france.csv'
+FROM 'data_sources/regions-france.csv'
 CSV HEADER;
 
 \echo '---------+---------+---------+---------+---------'
@@ -35,7 +35,7 @@ CSV HEADER;
 -- Copy from the file into a temporary table 't'
 CREATE TEMPORARY TABLE t(nuD INTEGER, noD VARCHAR, nuR INTEGER, noR VARCHAR);
 COPY t
-FROM '/home/djamel/covid-19_database/src/data_sources/departements-france.csv'
+FROM 'data_sources/departements-france.csv'
 CSV HEADER;
 
 -- insert into the definitive table from the temp
