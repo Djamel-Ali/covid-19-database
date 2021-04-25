@@ -1,15 +1,10 @@
 from src import *
 
-
-def init_psql():
-    config = parse()
-    params = Psql.get_params(config)
-    return Psql(**params)
-
-
 if __name__ == '__main__':
     # init psql
-    psql = init_psql()
+    config = Config()
+    psql = config.psql
+    psql.VERBOSE = True # TODO rm
 
     # creation table
     create_table(psql)
@@ -21,9 +16,9 @@ if __name__ == '__main__':
     # TODO
 
     # filling
-    filler = Filler(psql)
+    filler = Filler(config)
     filler.fill_all()
 
     print("commit a la base.")
     psql.commit()
-    #psql.close()
+    psql.close()

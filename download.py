@@ -1,13 +1,12 @@
 import requests
-from pathlib import Path
 from bs4 import BeautifulSoup
-from src import parse
+
+from src import Config
 
 URL = "https://www.data.gouv.fr/fr/datasets/" \
       "donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/" \
       "#community-resources"
-SECTION_DOWNLOAD = "download"
-KEY_DIR = "output"
+
 
 def get_text(article):
     return article.h4.text
@@ -45,9 +44,8 @@ def get_infos():
 
 
 if __name__ == "__main__":
-    config = parse()
-    dir_out = Path(config[SECTION_DOWNLOAD][KEY_DIR])
+    config = Config()
 
     infos = get_infos()
     for info in infos.values():
-        save(dir_out, *info)
+        save(config.path_data_source, *info)
