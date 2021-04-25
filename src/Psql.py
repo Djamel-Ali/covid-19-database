@@ -26,13 +26,17 @@ class Psql:
         if commit:
             self.commit()
 
-    def execute_template(self, template: Template, params_template: dict,
+    def execute_template(self, template: Template,
+                         params_template: dict = dict(),
                          commit: bool = False):
         self.execute(template.replace(**params_template), commit)
 
     def commit(self):
         self.connection.commit()
 
+    def close(self):
+        self.connection.close()
+
     def __del__(self):
         if self.connection is not None:
-            self.connection.close()
+            self.close()

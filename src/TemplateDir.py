@@ -8,6 +8,10 @@ class TemplateDir:
     def __init__(self, path: Path = TEMPLATES_DIR):
         self.path = path
 
+    def get_template(self, name):
+        path_file = self.path / (name + ".sql")
+        return Template(path_file)
+
     def iter_file(self):
         return sorted(self.path.iterdir())
 

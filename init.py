@@ -1,8 +1,29 @@
-from src import Psql, parse, create_table
+from src import *
 
-if __name__ == '__main__':
+
+def init_psql():
     config = parse()
     params = Psql.get_params(config)
-    psql = Psql(**params)
+    return Psql(**params)
 
+
+if __name__ == '__main__':
+    # init psql
+    psql = init_psql()
+
+    # creation table
     create_table(psql)
+
+    # function
+    # TODO
+
+    # trigger
+    # TODO
+
+    # filling
+    filler = Filler(psql)
+    filler.fill_all()
+
+    print("commit a la base.")
+    psql.commit()
+    #psql.close()
