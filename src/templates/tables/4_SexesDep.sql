@@ -1,6 +1,6 @@
 CREATE TABLE SexesDep
 (
-    numDep INTEGER REFERENCES Departement(numDep),
+    numDep CHAR(3) REFERENCES Departement(numDep),
     jour DATE NOT NULL CHECK (jour <= CURRENT_DATE),
     idSexe INTEGER REFERENCES Sexe(idSexe),
     PRIMARY KEY (numDep, jour, idSexe),

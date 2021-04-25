@@ -48,6 +48,7 @@ class Psql:
         self.connection.commit()
 
     def close(self):
+        self.cursor.close()
         self.connection.close()
 
     def __del__(self):
