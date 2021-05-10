@@ -1,24 +1,27 @@
-from src import *
+from src import Config, create_table, Filler
 
 if __name__ == '__main__':
     # init psql
     config = Config()
     psql = config.psql
-    psql.VERBOSE = True # TODO rm
+    psql.VERBOSE = True   # TODO rm
 
     # creation table
     create_table(psql)
+    psql.commit()
 
     # function
     # TODO
+    psql.commit()
 
     # trigger
-    # TODO
+    #TODO
+    psql.commit()
 
     # filling
     filler = Filler(config)
     filler.fill_all()
-
-    print("commit a la base.")
     psql.commit()
+
+    #close connection
     psql.close()
