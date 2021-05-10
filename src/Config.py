@@ -8,6 +8,14 @@ SECTION_DATA = "data"
 KEY_SOURCE = "source"
 SECTION_POSTGRES = "postgresql"
 
+DIR_NAME = {
+    "incid": "incid",
+    "sexe": "hospit_sexe",
+    "hospi_new": "hospit_nouveau",
+    "age": "hospit_cls_age",
+    "etabli": "hospit_etablissement"
+}
+
 
 class Config(ConfigParser):
     def __init__(self):

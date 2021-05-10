@@ -33,13 +33,13 @@ class Psql:
 
         self.execute(template.replace(**params_template), commit)
 
-    def copy(self, file_stream, table, sep=','):
+    def copy(self, file_stream, table, sep=',', columns=None):
         if self.VERBOSE:
             print("----- copy -----")
             print(f"copy csv file: \"{file_stream.name}\"")
             print(f"use separator \"{sep}\", in table \"{table}\"")
             print("-------------------")
-        self.cursor.copy_from(file_stream, table, sep)
+        self.cursor.copy_from(file_stream, table, sep, columns=columns)
 
     def get_iterator(self):
         return self.cursor.fetchall()

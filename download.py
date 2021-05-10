@@ -1,16 +1,10 @@
-from src import Config, get_infos, save
-
-DIR_NAME = {
-    "incid": "incid",
-    "sexe": "hospit_sexe",
-    "hospi_new": "hospit_nouveau",
-    "age": "hospit_cls_age",
-    "etabli": "hospit_etablissement"
-}
+from src import Config, get_infos, save, DIR_NAME, Filler
 
 if __name__ == "__main__":
     config = Config()
+    filler = Filler(config)
 
     infos = get_infos()
     for name, info in infos.items():
-        save(config.path_data_source / DIR_NAME[name], *info)
+        path = save(config.path_data_source / DIR_NAME[name], *info)
+        filler.fill(name, path)

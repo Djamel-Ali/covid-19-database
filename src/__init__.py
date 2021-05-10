@@ -1,4 +1,4 @@
-from .Config import Config
+from .Config import Config, DIR_NAME
 from .creation_table import create_table
 from .Filler import Filler
 from .Psql import Psql
@@ -12,4 +12,5 @@ __all__ = \
         "create_table",
         "get_infos",
         "save",
+        "DIR_NAME"
     ]
