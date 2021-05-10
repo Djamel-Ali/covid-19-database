@@ -1,21 +1,25 @@
-from src import Config, create_table, Filler
+from src import \
+    Config, \
+    create_tables, \
+    create_functions, \
+    create_triggers, \
+    Filler
 
 if __name__ == '__main__':
     # init psql
     config = Config()
     psql = config.psql
-    psql.VERBOSE = True   # TODO rm
 
     # creation table
-    create_table(psql)
+    create_tables(psql)
     psql.commit()
 
     # function
-    # TODO
+    create_functions(psql)
     psql.commit()
 
     # trigger
-    #TODO
+    create_triggers(psql)
     psql.commit()
 
     # filling

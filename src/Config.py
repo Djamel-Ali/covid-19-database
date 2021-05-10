@@ -32,7 +32,10 @@ class Config(ConfigParser):
 
     @property
     def psql_param(self) -> dict:
-        return {k: v for k, v in self.items(SECTION_POSTGRES)}
+        dict = {k: v for k, v in self.items(SECTION_POSTGRES)}
+        if "verbose" in self[SECTION_POSTGRES]:
+            dict["verbose"] = self.getboolean(SECTION_POSTGRES, "verbose")
+        return dict
 
     @property
     def path_data_source(self):

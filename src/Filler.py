@@ -43,10 +43,8 @@ class Filler:
             self.psql.copy(f, table, **kwargs)
 
     def __fill_csv_apply_func(self, path: str, table: str,
-                              columns: tuple,
-                              funcs: tuple,
-                              sep=",",
-                              update=False):
+                              columns: tuple, funcs: tuple,
+                              sep=","):
         assert len(columns) == len(funcs)
 
         print(f"Remplissage de la table {table} "
@@ -59,7 +57,7 @@ class Filler:
             for line in f.readlines():
                 line = tuple([f(l) for l, f in zip(line.split(sep), funcs)])
                 assert len(line) == len(funcs)
-                values.append(f"({','.join(line)})")
+                values.append(f"({', '.join(line)})")
 
             values_str = ",\n".join(values)
         request = f"INSERT INTO {table} ({','.join(columns)}) VALUES\n" \
@@ -96,14 +94,14 @@ class Filler:
         return (
             ("numReg", str_to_int),
             ("clAge90", str_to_int),
-            ("jour", lambda x: to_date(x, "YYYY-MM-DD")),
-            ("hospAge", str),
-            ("reaAge", str),
+            ("jour", to_date),
+            ("hospAge", to_int),
+            ("reaAge", to_int),
             ("hospConvAge", int_or_null),
             ("ssrUsldAge", int_or_null),
             ("autreAge", int_or_null),
-            ("radAge", str),
-            ("dcAge", str))
+            ("radAge", to_int),
+            ("dcAge", to_int))
 
     @property
     def columns_age_reg(self):
@@ -120,7 +118,7 @@ class Filler:
                                    table="AgesReg",
                                    columns=self.columns_age_reg,
                                    funcs=self.funcs_age_reg,
-                                   sep=";", update=True)
+                                   sep=";")
 
     def fill_all(self):
         print_head("DEBUT REMPLISSAGE DES TABLES")

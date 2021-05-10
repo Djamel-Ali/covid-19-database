@@ -10,5 +10,9 @@ def to_str(string: str) -> str:
     return f"'{string}'"
 
 
-def to_date(string: str, format: str) -> str:
+def to_int(string: str) -> str:
+    return str(int(string))
+
+
+def to_date(string: str, format: str = "YYYY-MM-DD") -> str:
     return f"TO_DATE({to_str(string)}, '{format}')"

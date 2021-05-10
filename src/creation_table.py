@@ -4,7 +4,7 @@ from src.Psql import Psql
 
 DIR_TABLES = TEMPLATES_DIR / "tables"
 
-def create_table(psql: Psql, dir=DIR_TABLES):
+def create_tables(psql: Psql, dir=DIR_TABLES):
     print_head("DEBUT CREATION DES TABLES")
 
     template_dir = TemplateDir(dir)
