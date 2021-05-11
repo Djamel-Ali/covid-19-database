@@ -5,7 +5,7 @@ from src.Psql import Psql
 DIR_TABLES = TEMPLATES_DIR / "tables"
 
 def create_tables(psql: Psql, dir=DIR_TABLES):
-    print_head("DEBUT CREATION DES TABLES")
+    print_head("CREATION DES TABLES")
 
     template_dir = TemplateDir(dir)
     it = template_dir.iter_template()
@@ -15,5 +15,3 @@ def create_tables(psql: Psql, dir=DIR_TABLES):
     for template in it:
         print("Creation de la table:", template.name)
         psql.execute_template(template, {})
-
-    print_head("FIN DE CREATION DES TABLES")

@@ -13,13 +13,13 @@ class Filler:
 
     def fill(self, name, path):
         INSERTER = {
-            "age": lambda : self.fill_age_reg(path),
+            "age": lambda: self.fill_age_reg(path),
             # "incid": lambda : ,
             # "sexe": lambda : ,
             # "hospi_new": lambda : ,
             # "etabli": lambda :
         }
-        INSERTER.get(name, lambda : None)() #[name]()
+        INSERTER.get(name, lambda: None)()  # [name]()
 
     @property
     def psql(self):
@@ -43,9 +43,9 @@ class Filler:
             self.psql.copy(f, table, **kwargs)
 
     def __fill_csv_apply_func(self, path: str, table: str,
-                              columns: tuple, funcs: tuple,
-                              sep=","):
-        assert len(columns) == len(funcs)
+                              info: tuple, sep=","):
+        columns = [x[0] for x in info]
+        funcs = [x[1] for x in info]
 
         print(f"Remplissage de la table {table} "
               f"avec le fichier [{path}]")
@@ -87,45 +87,60 @@ class Filler:
     @property
     def path_age_reg(self):
         files = (self.path_data_source / DIR_NAME["age"]).iterdir()
-        return list(sorted(files))[0]
+        return max(files)
 
     @property
-    def info_col_age(self):
-        return (
-            ("numReg", str_to_int),
-            ("clAge90", str_to_int),
-            ("jour", to_date),
-            ("hospAge", to_int),
-            ("reaAge", to_int),
-            ("hospConvAge", int_or_null),
-            ("ssrUsldAge", int_or_null),
-            ("autreAge", int_or_null),
-            ("radAge", to_int),
-            ("dcAge", to_int))
-
-    @property
-    def columns_age_reg(self):
-        return tuple([x[0] for x in self.info_col_age])
-
-    @property
-    def funcs_age_reg(self):
-        return tuple([x[1] for x in self.info_col_age])
+    def info_age_reg(self):
+        return (("numReg", str_to_int),
+                ("clAge90", str_to_int),
+                ("jour", to_date),
+                ("hospAge", to_int),
+                ("reaAge", to_int),
+                ("hospConvAge", int_or_null),
+                ("ssrUsldAge", int_or_null),
+                ("autreAge", int_or_null),
+                ("radAge", to_int),
+                ("dcAge", to_int))
 
     def fill_age_reg(self, file_path=None):
         if file_path is None:
             file_path = self.path_age_reg
         self.__fill_csv_apply_func(file_path,
                                    table="AgesReg",
-                                   columns=self.columns_age_reg,
-                                   funcs=self.funcs_age_reg,
+                                   info=self.info_age_reg,
+                                   sep=";")
+
+    @property
+    def path_sexe_dep(self):
+        files = (self.path_data_source / DIR_NAME["sexe"]).iterdir()
+        return max(files)
+
+    @property
+    def info_sexe_dep(self):
+        return (("numDep", str_to_str),
+                ("idSexe", str_to_int),
+                ("jour", str_to_date),
+                ("hospSexe", to_str),
+                ("reaSexe", to_int),
+                ("hospConvSexe", int_or_null),
+                ("ssrUsldSexe", int_or_null),
+                ("autreSexe", int_or_null),
+                ("radSexe", to_int),
+                ("dcSexe", to_int))
+
+    def fill_sexe_dep(self, file_path=None):
+        if file_path is None:
+            file_path = self.path_sexe_dep
+        self.__fill_csv_apply_func(file_path,
+                                   table="SexesDep",
+                                   info=self.info_sexe_dep,
                                    sep=";")
 
     def fill_all(self):
-        print_head("DEBUT REMPLISSAGE DES TABLES")
+        print_head("REMPLISSAGE DES TABLES")
         self.fill_sexe()
         self.fill_region()
         self.fill_departement()
+        self.psql.commit()
         self.fill_age_reg()
-
-        print_head("FIN REPLISSAGE DES TABLES")
-
+        self.fill_sexe_dep()
