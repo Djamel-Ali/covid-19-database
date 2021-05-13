@@ -188,12 +188,12 @@ class Filler:
     def fill_incidence(self, incid_dep=None, incid_reg=None, service_file=None):
         self.exec_template_file("incidence")
 
+        print("Remplissage de la table Incidence")
+
         self.fill_incid_dep_tmp(incid_dep)
         self.fill_incid_reg_tmp(incid_reg)
         self.fill_service_tmp(service_file)
         self.psql.commit()
-
-        print("Remplissage de la table Incidence")
         self.psql.execute("SELECT InsertIncidence();")
 
     def fill_all(self):
@@ -203,6 +203,8 @@ class Filler:
         self.fill_departement()
         self.psql.commit()
 
-        # self.fill_age_reg()
+        self.fill_age_reg()
         self.fill_sexe_dep()
-        # self.fill_incidence()
+        self.fill_incidence()
+
+        self.psql.commit()
