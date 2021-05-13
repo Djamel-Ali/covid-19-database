@@ -67,30 +67,37 @@ script [`dowload.py`](download.py).
 ### [Fichier Configuration](database.ini)
 
 Les scripts précédent utilise un fichier de
-configuration [database.init](database.ini).
+configuration [database.init](database.ini) par défault.\
+Pour le modifié, il suffit d'ajouter l'argument `--config_file`.
 
 #### Clef
 - **postgres**
-  - **database** : nom de la base de donnée
-  - **user** : nom de l'utilisateur
-  - **host** *(optionel)*: donne le host pour se connecter a la base post gres
-  - **port** *(optionel)*: port de la base de donnée
-  - **password** *(optionel)*: mot de passe de l'utilisateur \
-    ... (voir les parametre d'initialisation 
-         de [psycopg](https://www.psycopg.org/docs/))
-  - **verbose** *(default=False)*: montre toute les requettes éffectué dans les scipts
+  - **dbname** \
+    Nom de la base de donnée
+  - **user** \
+    Nom de l'utilisateur
+  - **password** *(optionel)* \
+    Mot de passe de l'utilisateur
+  - **host** *(optionel)* \
+    Donne le host pour se connecter à la base postgres sql
+  - **port** *(optionel)* \
+    Port de la base de donnée
+  - **verbose** *(default=False)* \
+    Montre toute les requettes éffectué dans les scipts
 - **data**
-  - **source** : est la source des fichier a inséré dans la base 
-    ansi que la source des données lors de l'initialisation de la base
+  - **source** \
+    Est la source des fichier a inséré dans la base ansi que la 
+    source des données lors de l'initialisation de la base
 - **download**
-  - **insert** *(default=False)*: Si a vrai insert les données dans la base apres le téléchargment.
+  - **insert** *(default=False)* \
+    Si a vrai insert les données dans la base apres le téléchargment.
 
 #### Exemple
 
 ```ini
 [postgresql]
 host = localhost
-database = bda
+dbname = bda
 user = postgres
 verbose = false
 
