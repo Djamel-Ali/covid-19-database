@@ -14,7 +14,7 @@ DIR_NAME = {
     "sexe": "hospit_sexe",
     "incid_dep": "hospit_nouveau",
     "age": "hospit_cls_age",
-    "etabli": "hospit_etablissement"
+    "service": "hospit_etablissement"
 }
 
 
@@ -46,8 +46,7 @@ class Config(ConfigParser):
 
     @property
     def download_insert(self):
-        if "download" in self[SECTION_DOWNLOAD] and \
-           "insert" in self[SECTION_DOWNLOAD]:
+        if "download" in self and "insert" in self[SECTION_DOWNLOAD]:
             return self.getboolean(SECTION_DOWNLOAD, "insert")
         return False
 

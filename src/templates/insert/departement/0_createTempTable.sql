@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS tempDepartement;
-CREATE TEMPORARY TABLE tempDepartement
+CREATE TEMP TABLE tempDepartement
 (
     numDep CHAR(3),
     nomDep VARCHAR,

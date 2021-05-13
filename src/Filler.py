@@ -11,16 +11,6 @@ class Filler:
         self.config = config
         self.template_dir = TemplateDir(DIR_INSERT)
 
-    def fill(self, name, path):
-        INSERTER = {
-            "age": lambda: self.fill_age_reg(path),
-            # "incid": lambda : ,
-            # "sexe": lambda : ,
-            # "hospi_new": lambda : ,
-            # "etabli": lambda :
-        }
-        INSERTER[name]()
-
     @property
     def psql(self):
         return self.config.psql
@@ -147,7 +137,7 @@ class Filler:
 
     @property
     def path_service(self):
-        return self.__recent_file_dir("etabli")
+        return self.__recent_file_dir("service")
 
     @property
     def info_incid_dep(self):

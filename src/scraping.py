@@ -30,7 +30,7 @@ def get_infos():
             "sexe": next(it),
             "incid_dep": next(it),
             "age": next(it),
-            "etabli": next(it)
+            "service": next(it)
         }
 
 
