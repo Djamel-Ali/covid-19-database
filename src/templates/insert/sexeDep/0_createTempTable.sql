@@ -1,8 +1,9 @@
-CREATE TABLE SexesDep
+DROP TABLE IF EXISTS TempSexesDep;
+CREATE TABLE TempSexesDep
 (
-    numDep       CHAR(3) REFERENCES Departement(numDep),
-    jour         DATE NOT NULL CHECK (jour <= CURRENT_DATE),
-    idSexe       INTEGER REFERENCES Sexe (idSexe),
+    numDep       CHAR(3),
+    jour         DATE    NOT NULL CHECK (jour <= CURRENT_DATE),
+    idSexe       INTEGER CHECK ( idSexe = 0 OR idSexe = 1 OR idSexe = 2),
     PRIMARY KEY (numDep, jour, idSexe),
     hospSexe     INTEGER NOT NULL CHECK (hospSexe >= 0),
     reaSexe      INTEGER NOT NULL CHECK (reaSexe >= 0),

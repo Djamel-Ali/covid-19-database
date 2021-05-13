@@ -17,3 +17,7 @@ class TemplateDir:
 
     def iter_template(self):
         return map(Template, self.iter_file())
+
+    def exec_all_file(self, psql):
+        for template in self.iter_template():
+            psql.execute_template(template)

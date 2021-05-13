@@ -24,6 +24,9 @@ class Filler:
         template = self.template_dir.get_template("sexe")
         self.psql.execute_template(template)
 
+    def exec_template_file(self, name):
+        TemplateDir(DIR_INSERT / name).exec_all_file(self.psql)
+
     def __fill_csv_simple(self, path, table, **kwargs):
         print(f"Remplissage de la table {table} "
               f"avec le fichier [{path}]")
@@ -70,11 +73,7 @@ class Filler:
         return self.path_data_source / "departements-france.csv"
 
     def fill_departement(self):
-        template_dir = TemplateDir(DIR_INSERT / "departement")
-        for template in template_dir.iter_template():
-            self.psql.execute_template(template)
-        template_dir.iter_template()
-
+        self.exec_template_file("departement")
         self.__fill_csv_simple(self.path_departement, "tempDepartement")
 
     @property
@@ -122,10 +121,16 @@ class Filler:
     def fill_sexe_dep(self, file_path=None):
         if file_path is None:
             file_path = self.path_sexe_dep
+
+        self.exec_template_file("sexeDep")
+
         self.__fill_csv_apply_func(file_path,
-                                   table="SexesDep",
+                                   table="TempSexesDep",
                                    info=self.info_sexe_dep,
                                    sep=";")
+
+        self.psql.execute("SELECT insert_sexeDep_from_temp();")
+
 
     @property
     def path_incid_dep(self):
@@ -181,9 +186,7 @@ class Filler:
                                    self.info_service, sep=';')
 
     def fill_incidence(self, incid_dep=None, incid_reg=None, service_file=None):
-        template_dir = TemplateDir(DIR_INSERT / "incidence")
-        for template in template_dir.iter_template():
-            self.psql.execute_template(template)
+        self.exec_template_file("incidence")
 
         self.fill_incid_dep_tmp(incid_dep)
         self.fill_incid_reg_tmp(incid_reg)
@@ -191,7 +194,7 @@ class Filler:
         self.psql.commit()
 
         print("Remplissage de la table Incidence")
-        self.psql.execute("SELECT InsertIncidence()")
+        self.psql.execute("SELECT InsertIncidence();")
 
     def fill_all(self):
         print_head("REMPLISSAGE DES TABLES")
@@ -200,6 +203,6 @@ class Filler:
         self.fill_departement()
         self.psql.commit()
 
-        self.fill_age_reg()
+        # self.fill_age_reg()
         self.fill_sexe_dep()
-        self.fill_incidence()
+        # self.fill_incidence()
