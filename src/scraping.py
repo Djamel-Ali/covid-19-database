@@ -26,9 +26,9 @@ def get_infos():
     it = map(get_info, articles)
     return \
         {
-            "incid": next(it),
+            "incid_reg": next(it),
             "sexe": next(it),
-            "hospi_new": next(it),
+            "incid_dep": next(it),
             "age": next(it),
             "etabli": next(it)
         }

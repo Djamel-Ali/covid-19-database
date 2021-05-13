@@ -11,7 +11,7 @@ def create_tables(psql: Psql, dir=DIR_TABLES):
     it = template_dir.iter_template()
     drop_template = next(it)
     print("Suppression des anciennes tables")
-    psql.execute_template(drop_template, {})
+    psql.execute_template(drop_template)
     for template in it:
         print("Creation de la table:", template.name)
-        psql.execute_template(template, {})
+        psql.execute_template(template)

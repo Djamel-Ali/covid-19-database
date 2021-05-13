@@ -7,4 +7,5 @@ if __name__ == "__main__":
     infos = get_infos()
     for name, info in infos.items():
         path = save(config.path_data_source / DIR_NAME[name], *info)
-        filler.fill(name, path)
+        if config.download_insert:
+            filler.fill(name, path)

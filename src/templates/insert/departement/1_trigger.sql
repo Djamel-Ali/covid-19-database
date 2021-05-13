@@ -1,11 +1,3 @@
-CREATE TEMPORARY TABLE tempDepartement
-(
-    numDep CHAR(3),
-    nomDep VARCHAR,
-    numReg INTEGER,
-    nomReg VARCHAR
-);
-
 CREATE OR REPLACE FUNCTION insert_departement() RETURNS TRIGGER AS
 $$
 BEGIN
@@ -15,8 +7,8 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS InsertTempDepartement ON tempDepartement;
 
 CREATE TRIGGER InsertTempDepartement
-AFTER INSERT ON tempDepartement
-FOR EACH ROW EXECUTE FUNCTION insert_departement();
-
+    AFTER INSERT ON tempDepartement
+    FOR EACH ROW EXECUTE FUNCTION insert_departement();

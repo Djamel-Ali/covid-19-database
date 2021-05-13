@@ -5,8 +5,10 @@ def remove_double_quote(string: str) -> str:
 def to_str(string: str) -> str:
     return f"'{string}'"
 
+
 def str_to_str(string: str) -> str:
     return to_str(remove_double_quote(string))
+
 
 def to_int(string: str) -> str:
     return str(int(string))

@@ -7,11 +7,12 @@ from .Psql import Psql
 SECTION_DATA = "data"
 KEY_SOURCE = "source"
 SECTION_POSTGRES = "postgresql"
+SECTION_DOWNLOAD = "download"
 
 DIR_NAME = {
-    "incid": "incid",
+    "incid_reg": "incid",
     "sexe": "hospit_sexe",
-    "hospi_new": "hospit_nouveau",
+    "incid_dep": "hospit_nouveau",
     "age": "hospit_cls_age",
     "etabli": "hospit_etablissement"
 }
@@ -42,6 +43,13 @@ class Config(ConfigParser):
         if self.__data_source is None:
             self.__data_source = Path(self[SECTION_DATA][KEY_SOURCE])
         return self.__data_source
+
+    @property
+    def download_insert(self):
+        if "download" in self[SECTION_DOWNLOAD] and \
+           "insert" in self[SECTION_DOWNLOAD]:
+            return self.getboolean(SECTION_DOWNLOAD, "insert")
+        return False
 
     @staticmethod
     def arg_parse():
