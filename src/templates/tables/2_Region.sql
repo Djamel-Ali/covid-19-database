@@ -1,0 +1,5 @@
+CREATE TABLE Region
+(
+    numReg INTEGER PRIMARY KEY CHECK ((numReg BETWEEN 1 AND 6) OR (numReg BETWEEN 11 AND 94)),
+    nomReg VARCHAR NOT NULL
+);
