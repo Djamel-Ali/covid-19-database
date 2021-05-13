@@ -1,2 +1,2 @@
 INSERT INTO Region (numReg, bomReg) VALUES
-(94, "Outre Mer")
+(97, "Outre Mer 2")
