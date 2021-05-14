@@ -3,6 +3,7 @@ from src import \
     create_tables, \
     create_functions, \
     create_triggers, \
+    create_indexs, \
     Filler
 
 if __name__ == '__main__':
@@ -25,6 +26,10 @@ if __name__ == '__main__':
     # filling
     filler = Filler(config)
     filler.fill_all()
+    psql.commit()
+
+    # index
+    create_indexs(psql)
     psql.commit()
 
     #close connection
