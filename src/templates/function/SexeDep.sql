@@ -28,22 +28,21 @@ BEGIN
             RETURN NEW;
         END IF;
 
-        UPDATE TempSexesDep
-        SET hospSexe    = NEW.hospSexe,
-            reaSexe     = NEW.reaSexe,
-            radSexe     = NEW.radSexe,
-            dcSexe      = NEW.dcSexe,
-            ssrUsldSexe = NEW.ssrUsldSexe,
-            hospConvSexe= NEW.hospConvSexe,
-            autreSexe   = NEW.autreSexe
-            WHERE numDep = NEW.numDep
-                AND jour = NEW.Jour
-                AND idSexe = NEW.idSexe;
-        RAISE NOTICE 'ALREADY EXIST UPDATE %', (NEW.*);
-        RETURN NULL;
+
     END IF;
 
-    RAISE NOTICE 'ALREADY EXIST NO INSERT %', (NEW.*);
+    UPDATE TempSexesDep
+    SET hospSexe    = NEW.hospSexe,
+        reaSexe     = NEW.reaSexe,
+        radSexe     = NEW.radSexe,
+        dcSexe      = NEW.dcSexe,
+        ssrUsldSexe = NEW.ssrUsldSexe,
+        hospConvSexe= NEW.hospConvSexe,
+        autreSexe   = NEW.autreSexe
+    WHERE numDep = NEW.numDep
+      AND jour = NEW.Jour
+      AND idSexe = NEW.idSexe;
+    RAISE NOTICE 'ALREADY EXIST UPDATE %', NEW;
     RETURN NULL;
 END
 $$ LANGUAGE plpgsql;

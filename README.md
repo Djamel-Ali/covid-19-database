@@ -1,7 +1,5 @@
 # BDA -- Covid-19 - Data Base
 
-[[TOC]]
-
 ## Objectif
 
 Ce projet ce concentre les données hospitalière du covid-19. Disponible sur le 
@@ -17,16 +15,16 @@ ces données.
 
 Les scripts utilisé sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), et utilise un
 environment [Pipenv](https://pypi.org/project/pipenv/). Et
-utilise [psycopg](https://www.psycopg.org/docs/) pour géré la base postgres
+utilise [psycopg2](https://www.psycopg.org/docs/) pour géré la base postgres
 facilement.
 
 ### [Pipenv](https://pypi.org/project/pipenv/)
 
-Installer pipenv dans vos paquets Python avec la commande :
-
+Installer pipenv dans votre environment python global avec la commande :
 ```shell
 $ python -m pip install pipenv
 ```
+(attention a utilisé python3.9)
 
 Pour initialiser l'environnement :
 
@@ -90,7 +88,7 @@ Pour le modifié, il suffit d'ajouter l'argument `--config_file`.
     source des données lors de l'initialisation de la base
 - **download**
   - **insert** *(default=False)* \
-    Si a vrai insert les données dans la base apres le téléchargment.
+    Si a vrai insert les données dans la base apres le téléchargement.
 
 #### Exemple
 
@@ -111,12 +109,14 @@ insert = false
 ## Tests
 Des tests sont disponibles dans le dossier [`tests/`](tests), 
 ils utilise [Pytest](https://docs.pytest.org/en/6.2.x/). \
-Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), dans l'enviroment il suffit de faire:
+Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), 
+dans l'enviroment il suffit de faire:
 ```shell
 $ pipenv install --dev
 ```
 
-Penser a initialiser a configurer une base de test, avec le fichier [tests/database.ini](tests/database.ini).
+Penser à initialiser et à configurer une base de test, 
+avec le fichier [tests/database.ini](tests/database.ini).
 Et de l'initialisé avec:
 ```shell
 (env) $ python init.py -c tests/database.ini 
@@ -127,12 +127,16 @@ Pour lancer les tests ils suffit de faire
 (env) $ pytest tests/
 ```
 
-### Documents
+#### Template
+Tout le projet utilise essentiellement SQL, on retrouve tout ces fichier sql
+dans le dossier [src/templates](src/templates).
 
-- [rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
-- [rapport final](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
+De meme pour les tests dans [tests/templates](tests/templates).
+
+### Documents
+- [Rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
+- [Rapport final](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
 
 ### Authors
-
 - Jéremy DAMOUR
 - Djamel ALI
