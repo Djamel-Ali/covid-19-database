@@ -4,3 +4,10 @@ CREATE TRIGGER NoAddAlreadyExistSexeDep
     FOR EACH ROW
 EXECUTE
     FUNCTION insert_sexeDep();
+
+CREATE TRIGGER NoAddAlreadyExistTempSexeDep
+    BEFORE INSERT
+    ON TempSexesDep
+    FOR EACH ROW
+EXECUTE
+    FUNCTION insert_sexeDepTemp();

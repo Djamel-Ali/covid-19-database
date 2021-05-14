@@ -49,3 +49,4 @@ def test_good_sexe_dep_total():
                  "WHERE jour='2019-01-01' "
                  "GROUP BY jour;")
     assert psql.get_iterator() == [(2,)]
+    psql.execute("DELETE FROM SexesDep WHERE jour='2019-01-01';")
