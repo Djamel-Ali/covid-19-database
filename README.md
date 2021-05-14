@@ -1,8 +1,8 @@
-# BDA -- Covid-19 - Data Base
+# BDA -- Covid-19 database
 
 ## Objectif
 
-Ce projet se concentre les données hospitalières de la covid-19. Disponible sur le 
+Ce projet se concentre sur les données hospitalières de la covid-19. Disponible sur le
 site du [gouvernement](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/#). \
 Différents scripts python sont disponibles pour pouvoir utiliser facilement
 ces données.
@@ -13,10 +13,10 @@ ces données.
 
 ## Script
 
-Les scripts utilisés sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), 
-et utilisent un environnement [Pipenv](https://pypi.org/project/pipenv/).
-Et utilise [psycopg2](https://www.psycopg.org/docs/) 
-pour gérer la base postgres facilement.
+Les scripts utilisés sont en [Python 3.9](https://www.python.org/downloads/release/python-390/),
+ils utilisent un environnement [Pipenv](https://pypi.org/project/pipenv/).
+Aussi, ils utilise [psycopg2](https://www.psycopg.org/docs/)
+pour gérer la base postgres plus facilement.
 
 ### [Pipenv](https://pypi.org/project/pipenv/)
 
@@ -24,7 +24,7 @@ Installer pipenv dans votre environnement python global avec la commande :
 ```shell
 $ python -m pip install pipenv
 ```
-(attention a utilisé python3.9)
+(attention à utiliser python3.9)
 
 Pour initialiser l'environnement :
 
@@ -32,14 +32,14 @@ Pour initialiser l'environnement :
 $ pipenv install
 ```
 
-Pour entrer dans l'environnement vous pouvez faire :
+Pour entrer dans l'environnement, tapez la commande :
 
 ```shell
 $ pipenv shell
 (env) $
 ```
 
-Pour exécuter des commandes sans entrée dans l'environnement, utiliser la commande :
+Pour exécuter des commandes sans entrer dans l'environnement, utilisez la commande :
 
 ```shell
 $ pipenv run ...
@@ -65,7 +65,7 @@ script [`dowload.py`](download.py).
 ### [Fichier Configuration](database.ini)
 
 Les scripts précédents utilisent un fichier de
-configuration [database.init](database.ini) par défault.\
+configuration [database.init](database.ini) par défaut.\
 Vous pouvez en spécifier un avec l'argument `--config_file`.
 
 #### Clef
@@ -77,18 +77,18 @@ Vous pouvez en spécifier un avec l'argument `--config_file`.
   - **password** *(optionnel)* \
     Mot de passe de l'utilisateur
   - **host** *(optionnel)* \
-    Donne le host pour se connecter à la base postgres sql
+    Donne le host pour se connecter à la base postgresql
   - **port** *(optionnel)* \
-    Port de la base de donnée
-  - **verbose** *(par défaut=False)* \
+    Port de la base de données
+  - **verbose** *(défaut=False)* \
     Montre toutes les requettes éffectuées dans les scipts
 - **data**
   - **source** \
-    Est la source des fichiers à insérer dans la base ainsi que la 
+    Est la source des fichiers à insérer dans la base ainsi que la
     source des données lors de l'initialisation de la base
 - **download**
   - **insert** *(default=False)* \
-    Si a vrai insert les données dans la base après le téléchargement.
+    Si (default=True) ça insert les données dans la base après le téléchargement.
 
 #### Exemple
 
@@ -107,22 +107,22 @@ insert = false
 ```
 
 ## Tests
-Des tests sont disponibles dans le dossier [`tests/`](tests), 
+Des tests sont disponibles dans le dossier [`tests/`](tests),
 ils utilisent [Pytest](https://docs.pytest.org/en/6.2.x/). \
-Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), 
-dans l'environnement il faut de faire :
+Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/),
+dans l'environnement il faut entrer la commande :
 ```shell
 $ pipenv install --dev
 ```
 
-Penser à initialiser et à configurer une base de test, 
+Pensez à initialiser et à configurer une base de test,
 avec le fichier [tests/database.ini](tests/database.ini).
-Et de l'initialisé avec:
+Et de l'initialiser avec:
 ```shell
-(env) $ python init.py -c tests/database.ini 
+(env) $ python init.py -c tests/database.ini
 ```
 
-Pour lancer les tests ils suffit de faire
+Pour lancer les tests ils suffit de taper
 ```shell
 (env) $ pytest tests/
 ```
