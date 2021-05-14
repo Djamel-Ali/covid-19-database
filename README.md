@@ -38,7 +38,7 @@ Pour entrer dans l'environnement vous pouvez faire :
 
 ```shell
 $ pipenv shell
-[pipenv] $
+(env) $
 ```
 
 Pour exécuter des command sans entrée dans l'environnement utilisé la commande :
@@ -52,7 +52,7 @@ $ pipenv run ...
 Pour initialiser la base de donnée avec le scipt [`init.py`](init.py).
 
 ```shell
-[pipenv] $ python init.py
+(env) $ python init.py
 ```
 
 ### Téléchargement des données
@@ -61,7 +61,7 @@ Pour lancer le téléchargement des derniers fichier utilisé le
 script [`dowload.py`](download.py).
 
 ```shell
-[pipenv] $ python download.py
+(env) $ python download.py
 ```
 
 ### [Fichier Configuration](database.ini)
@@ -106,6 +106,25 @@ source = data_sources
 
 [download]
 insert = false
+```
+
+## Tests
+Des tests sont disponibles dans le dossier [`tests/`](tests), 
+ils utilise [Pytest](https://docs.pytest.org/en/6.2.x/). \
+Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), dans l'enviroment il suffit de faire:
+```shell
+$ pipenv install --dev
+```
+
+Penser a initialiser a configurer une base de test, avec le fichier [tests/database.ini](tests/database.ini).
+Et de l'initialisé avec:
+```shell
+(env) $ python init.py -c tests/database.ini 
+```
+
+Pour lancer les tests ils suffit de faire
+```shell
+(env) $ pytest tests/
 ```
 
 ### Documents
