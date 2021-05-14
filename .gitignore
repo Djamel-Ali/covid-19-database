@@ -1,4 +1,4 @@
 log
 **.idea
-src/insert/Pipfile.lock
 /Pipfile.lock
+**__pycache__/
