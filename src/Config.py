@@ -19,9 +19,11 @@ DIR_NAME = {
 
 
 class Config(ConfigParser):
-    def __init__(self):
+    def __init__(self, path_file=None):
         super().__init__()
-        self.read(self.arg_parse())
+        if path_file is None:
+            path_file = self.arg_parse()
+        self.read(path_file)
         self.__data_source = None
         self.__psql = None
 

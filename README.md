@@ -15,8 +15,8 @@ ces données.
 
 ## Script
 
-Les scripts utilisé sont en python, et utilise un
-enviroment [Pipenv](https://pypi.org/project/pipenv/). Et
+Les scripts utilisé sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), et utilise un
+environment [Pipenv](https://pypi.org/project/pipenv/). Et
 utilise [psycopg](https://www.psycopg.org/docs/) pour géré la base postgres
 facilement.
 
@@ -38,7 +38,7 @@ Pour entrer dans l'environnement vous pouvez faire :
 
 ```shell
 $ pipenv shell
-[pipenv] $
+(env) $
 ```
 
 Pour exécuter des command sans entrée dans l'environnement utilisé la commande :
@@ -52,7 +52,7 @@ $ pipenv run ...
 Pour initialiser la base de donnée avec le scipt [`init.py`](init.py).
 
 ```shell
-[pipenv] $ python init.py
+(env) $ python init.py
 ```
 
 ### Téléchargement des données
@@ -61,36 +61,43 @@ Pour lancer le téléchargement des derniers fichier utilisé le
 script [`dowload.py`](download.py).
 
 ```shell
-[pipenv] $ python download.py
+(env) $ python download.py
 ```
 
 ### [Fichier Configuration](database.ini)
 
 Les scripts précédent utilise un fichier de
-configuration [database.init](database.ini).
+configuration [database.init](database.ini) par défault.\
+Pour le modifié, il suffit d'ajouter l'argument `--config_file`.
 
 #### Clef
 - **postgres**
-  - **database** : nom de la base de donnée
-  - **user** : nom de l'utilisateur
-  - **host** *(optionel)*: donne le host pour se connecter a la base post gres
-  - **port** *(optionel)*: port de la base de donnée
-  - **password** *(optionel)*: mot de passe de l'utilisateur \
-    ... (voir les parametre d'initialisation 
-         de [psycopg](https://www.psycopg.org/docs/))
-  - **verbose** *(default=False)*: montre toute les requettes éffectué dans les scipts
+  - **dbname** \
+    Nom de la base de donnée
+  - **user** \
+    Nom de l'utilisateur
+  - **password** *(optionel)* \
+    Mot de passe de l'utilisateur
+  - **host** *(optionel)* \
+    Donne le host pour se connecter à la base postgres sql
+  - **port** *(optionel)* \
+    Port de la base de donnée
+  - **verbose** *(default=False)* \
+    Montre toute les requettes éffectué dans les scipts
 - **data**
-  - **source** : est la source des fichier a inséré dans la base 
-    ansi que la source des données lors de l'initialisation de la base
+  - **source** \
+    Est la source des fichier a inséré dans la base ansi que la 
+    source des données lors de l'initialisation de la base
 - **download**
-  - **insert** *(default=False)*: Si a vrai insert les données dans la base apres le téléchargment.
+  - **insert** *(default=False)* \
+    Si a vrai insert les données dans la base apres le téléchargment.
 
 #### Exemple
 
 ```ini
 [postgresql]
 host = localhost
-database = bda
+dbname = bda
 user = postgres
 verbose = false
 
@@ -99,6 +106,25 @@ source = data_sources
 
 [download]
 insert = false
+```
+
+## Tests
+Des tests sont disponibles dans le dossier [`tests/`](tests), 
+ils utilise [Pytest](https://docs.pytest.org/en/6.2.x/). \
+Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), dans l'enviroment il suffit de faire:
+```shell
+$ pipenv install --dev
+```
+
+Penser a initialiser a configurer une base de test, avec le fichier [tests/database.ini](tests/database.ini).
+Et de l'initialisé avec:
+```shell
+(env) $ python init.py -c tests/database.ini 
+```
+
+Pour lancer les tests ils suffit de faire
+```shell
+(env) $ pytest tests/
 ```
 
 ### Documents
