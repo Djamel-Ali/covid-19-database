@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS TempSexesDep;
+DROP TABLE IF EXISTS TempSexesDep CASCADE;
 CREATE TABLE TempSexesDep
 (
     numDep       CHAR(3),

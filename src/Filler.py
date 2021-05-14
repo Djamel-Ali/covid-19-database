@@ -128,7 +128,6 @@ class Filler:
                                    table="TempSexesDep",
                                    info=self.info_sexe_dep,
                                    sep=";")
-
         self.psql.execute("SELECT insert_sexeDep_from_temp();")
 
 

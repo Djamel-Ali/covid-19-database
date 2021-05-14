@@ -7,6 +7,7 @@ from .Template import Template
 class Psql:
     def __init__(self, verbose=False, **params: dict):
         self.VERBOSE = verbose
+        self.connection = None
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
 

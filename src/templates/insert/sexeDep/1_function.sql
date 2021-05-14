@@ -1,34 +1,51 @@
-CREATE OR REPLACE FUNCTION check_total_sexeDep() RETURNS BOOLEAN AS
+CREATE OR REPLACE FUNCTION list_sexeDep_correct()
+    RETURNS
+        TABLE
+        (
+            numDep CHAR(3),
+            jour   DATE
+        )
+AS
 $$
 BEGIN
-    RETURN EXISTS(
-            SELECT numDep,
-                   jour,
-                   COUNT(hospSexe)     AS countHosp,
-                   COUNT(reaSexe)      AS countRea,
-                   COUNT(radSexe)      AS countRad,
-                   COUNT(dcSexe)       AS countDc,
-                   COUNT(ssrUsldSexe)  AS countSsrUsldSexe,
-                   COUNT(hospConvSexe) AS countHospConvSexe,
-                   COUNT(autreSexe)    AS countAutreSexe
-            FROM tempSexesdep
-            WHERE idSexe != 0
-            GROUP BY numDep, jour
+    CREATE OR REPLACE TEMP VIEW intersectionViewSexeDepTotal AS
+    (
+        SELECT numDep,
+               jour,
+               SUM(hospSexe)     AS countHosp,
+               SUM(reaSexe)      AS countRea,
+               SUM(radSexe)      AS countRad,
+               SUM(dcSexe)       AS countDc,
+               SUM(ssrUsldSexe)  AS countSsrUsldSexe,
+               SUM(hospConvSexe) AS countHospConvSexe,
+               SUM(autreSexe)    AS countAutreSexe
+        FROM tempSexesdep
+        WHERE idSexe != 0
+        GROUP BY numDep, jour
+        ORDER BY jour, numDep
+    )
+    INTERSECT
+    (
+        SELECT numDep,
+               jour,
+               hospSexe     AS countHosp,
+               reaSexe      AS countRea,
+               radSexe      AS countRad,
+               dcSexe       AS countDc,
+               ssrUsldSexe  AS countSsrUsldSexe,
+               hospConvSexe AS countHospConvSexe,
+               autreSexe    AS countAutreSexe
+        FROM tempSexesdep
+        WHERE idSexe = 0
+        ORDER BY jour, numDep
+    );
 
-            INTERSECT
-
-            SELECT numDep,
-                   jour,
-                   hospSexe     AS countHosp,
-                   reaSexe      AS countRea,
-                   radSexe      AS countRad,
-                   dcSexe       AS countDc,
-                   ssrUsldSexe  AS countSsrUsldSexe,
-                   hospConvSexe AS countHospConvSexe,
-                   autreSexe    AS countAutreSexe
-            FROM tempSexesdep
-            WHERE idSexe = 0
-        );
+    RETURN QUERY (
+        SELECT intersectionViewSexeDepTotal.numDep,
+               intersectionViewSexeDepTotal.jour
+        FROM intersectionViewSexeDepTotal
+        ORDER BY jour, numDep
+    );
 END
 $$ LANGUAGE plpgsql;
 
@@ -37,14 +54,28 @@ CREATE OR REPLACE FUNCTION insert_sexeDep_from_temp()
     RETURNS VOID AS
 $$
 BEGIN
-    IF (SELECT check_total_sexeDep()) THEN
-        RAISE EXCEPTION 'Total sexe different total id sexe 0';
-    END IF;
+    CREATE OR REPLACE TEMP VIEW toInsert AS
+    SELECT * FROM list_sexeDep_correct();
 
     INSERT INTO SexesDep
-    SELECT * FROM TempSexesDep
-        WHERE idSexe != 0;
+    SELECT TempSexesDep.numDep,
+           TempSexesDep.jour,
+           idSexe,
+           hospSexe,
+           reaSexe,
+           radSexe,
+           dcSexe,
+           ssrUsldSexe,
+           hospConvSexe,
+           autreSexe
+    FROM TempSexesDep
+             JOIN toInsert ON toInsert.numDep = TempSexesDep.numDep AND
+                              toInsert.jour = TempSexesDep.jour
+    WHERE idSexe != 0;
 
-    DELETE FROM TempSexesdep;
+    DELETE
+    FROM TempSexesdep
+    WHERE numDep IN (SELECT numDep FROM toInsert)
+      AND jour IN (SELECT jour FROM toInsert);
 END
 $$ LANGUAGE plpgsql;
