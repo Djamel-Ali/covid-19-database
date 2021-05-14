@@ -8,7 +8,7 @@ BEGIN
                     AND clAge90 = NEW.ClAge90) THEN
         RETURN NEW;
     END IF;
-    RAISE NOTICE 'ALREADY EXIST NO INSERT %', (NEW.*);
+    RAISE NOTICE 'ALREADY EXIST NO INSERT %', NEW;
     RETURN NULL;
 END
 $$ LANGUAGE plpgsql;
