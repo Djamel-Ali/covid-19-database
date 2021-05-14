@@ -2,9 +2,9 @@
 
 ## Objectif
 
-Ce projet ce concentre les données hospitalière du covid-19. Disponible sur le 
-site du [gouverment](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/#). \
-Différents sont script python sont disponibles pour pouvoir utiliser facilement
+Ce projet se concentre les données hospitalières de la covid-19. Disponible sur le 
+site du [gouvernement](https://www.data.gouv.fr/fr/datasets/donnees-hospitalieres-relatives-a-lepidemie-de-covid-19/#). \
+Différents scripts python sont disponibles pour pouvoir utiliser facilement
 ces données.
 
 ## Modélisation
@@ -13,14 +13,14 @@ ces données.
 
 ## Script
 
-Les scripts utilisé sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), et utilise un
-environment [Pipenv](https://pypi.org/project/pipenv/). Et
-utilise [psycopg2](https://www.psycopg.org/docs/) pour géré la base postgres
-facilement.
+Les scripts utilisés sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), 
+et utilisent un environnement [Pipenv](https://pypi.org/project/pipenv/).
+Et utilise [psycopg2](https://www.psycopg.org/docs/) 
+pour gérer la base postgres facilement.
 
 ### [Pipenv](https://pypi.org/project/pipenv/)
 
-Installer pipenv dans votre environment python global avec la commande :
+Installer pipenv dans votre environnement python global avec la commande :
 ```shell
 $ python -m pip install pipenv
 ```
@@ -39,7 +39,7 @@ $ pipenv shell
 (env) $
 ```
 
-Pour exécuter des command sans entrée dans l'environnement utilisé la commande :
+Pour exécuter des commandes sans entrée dans l'environnement, utiliser la commande :
 
 ```shell
 $ pipenv run ...
@@ -47,7 +47,7 @@ $ pipenv run ...
 
 ### Initialisation de la base
 
-Pour initialiser la base de donnée avec le scipt [`init.py`](init.py).
+Pour initialiser la base de données avec le script [`init.py`](init.py).
 
 ```shell
 (env) $ python init.py
@@ -55,7 +55,7 @@ Pour initialiser la base de donnée avec le scipt [`init.py`](init.py).
 
 ### Téléchargement des données
 
-Pour lancer le téléchargement des derniers fichier utilisé le
+Pour lancer le téléchargement des derniers fichiers, utiliser le
 script [`dowload.py`](download.py).
 
 ```shell
@@ -64,31 +64,31 @@ script [`dowload.py`](download.py).
 
 ### [Fichier Configuration](database.ini)
 
-Les scripts précédent utilise un fichier de
+Les scripts précédents utilisent un fichier de
 configuration [database.init](database.ini) par défault.\
-Pour le modifié, il suffit d'ajouter l'argument `--config_file`.
+Vous pouvez en spécifier un avec l'argument `--config_file`.
 
 #### Clef
 - **postgres**
   - **dbname** \
-    Nom de la base de donnée
+    Nom de la base de données
   - **user** \
     Nom de l'utilisateur
-  - **password** *(optionel)* \
+  - **password** *(optionnel)* \
     Mot de passe de l'utilisateur
-  - **host** *(optionel)* \
+  - **host** *(optionnel)* \
     Donne le host pour se connecter à la base postgres sql
-  - **port** *(optionel)* \
+  - **port** *(optionnel)* \
     Port de la base de donnée
-  - **verbose** *(default=False)* \
-    Montre toute les requettes éffectué dans les scipts
+  - **verbose** *(par défaut=False)* \
+    Montre toutes les requettes éffectuées dans les scipts
 - **data**
   - **source** \
-    Est la source des fichier a inséré dans la base ansi que la 
+    Est la source des fichiers à insérer dans la base ainsi que la 
     source des données lors de l'initialisation de la base
 - **download**
   - **insert** *(default=False)* \
-    Si a vrai insert les données dans la base apres le téléchargement.
+    Si a vrai insert les données dans la base après le téléchargement.
 
 #### Exemple
 
@@ -108,9 +108,9 @@ insert = false
 
 ## Tests
 Des tests sont disponibles dans le dossier [`tests/`](tests), 
-ils utilise [Pytest](https://docs.pytest.org/en/6.2.x/). \
+ils utilisent [Pytest](https://docs.pytest.org/en/6.2.x/). \
 Pour ajouter [Pytest](https://docs.pytest.org/en/6.2.x/), 
-dans l'enviroment il suffit de faire:
+dans l'environnement il faut de faire :
 ```shell
 $ pipenv install --dev
 ```
@@ -128,10 +128,10 @@ Pour lancer les tests ils suffit de faire
 ```
 
 #### Template
-Tout le projet utilise essentiellement SQL, on retrouve tout ces fichier sql
+Tout le projet utilise essentiellement SQL, on retrouve tous ces fichiers sql
 dans le dossier [src/templates](src/templates).
 
-De meme pour les tests dans [tests/templates](tests/templates).
+De même pour les tests dans [tests/templates](tests/templates).
 
 ### Documents
 - [Rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
