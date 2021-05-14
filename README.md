@@ -15,8 +15,8 @@ ces données.
 
 ## Script
 
-Les scripts utilisé sont en python, et utilise un
-enviroment [Pipenv](https://pypi.org/project/pipenv/). Et
+Les scripts utilisé sont en [Python 3.9](https://www.python.org/downloads/release/python-390/), et utilise un
+environment [Pipenv](https://pypi.org/project/pipenv/). Et
 utilise [psycopg](https://www.psycopg.org/docs/) pour géré la base postgres
 facilement.
 
