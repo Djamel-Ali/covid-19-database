@@ -88,7 +88,7 @@ Vous pouvez en spécifier un avec l'argument `--config_file`.
     source des données lors de l'initialisation de la base
 - **download**
   - **insert** *(default=False)* \
-    Si (default=True) ça insert les données dans la base après le téléchargement.
+    Si 'True' ça insert les données dans la base après le téléchargement.
 
 #### Exemple
 
