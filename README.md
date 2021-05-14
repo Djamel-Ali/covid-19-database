@@ -129,7 +129,8 @@ Pour lancer les tests ils suffit de faire
 
 ### Documents
 
-- [rapport](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
+- [rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
+- [rapport final](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
 
 ### Authors
 
