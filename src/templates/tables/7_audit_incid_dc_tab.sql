@@ -7,7 +7,3 @@ description VARCHAR(13) NOT NULL
 CHECK (description IN ('NOUVEAUX DC', 'MAJ + DC', 'MAJ - DC','SUPPRESSION')),
 nombre INTEGER NOT NULL CHECK (nombre > 0)
 );
-
-
-\echo TABLE audit créée  √
-\echo
