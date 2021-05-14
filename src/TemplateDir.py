@@ -21,3 +21,4 @@ class TemplateDir:
     def exec_all_file(self, psql):
         for template in self.iter_template():
             psql.execute_template(template)
+
