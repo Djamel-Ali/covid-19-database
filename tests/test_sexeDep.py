@@ -14,3 +14,15 @@ def test_wrong_sexe_dep_total():
                  "WHERE jour='2019-01-01' "
                  "GROUP BY jour;")
     assert psql.get_iterator() == []
+
+
+def test_good_sexe_dep_total():
+    FILLER.fill_sexe_dep(DIR_CSV / "sexe_dep_good_total.csv")
+    psql = FILLER.psql
+    psql.execute("SELECT * FROM TempSexesDep;")
+    assert len(psql.get_iterator()) == 0
+
+    psql.execute("SELECT count(jour) FROM SexesDep "
+                 "WHERE jour='2019-01-01' "
+                 "GROUP BY jour;")
+    assert psql.get_iterator() == [(2,)]
