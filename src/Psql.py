@@ -7,10 +7,13 @@ from .Template import Template
 class Psql:
     def __init__(self, verbose=False, **params: dict):
         self.VERBOSE = verbose
+        self.connection = None
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
 
-    def execute(self, command: str, commit: bool = False):
+    def execute(self, command: str,
+                commit: bool = False,
+                auto_rollback: bool = False):
         try:
             if self.VERBOSE:
                 print("----- execute -----")
@@ -20,18 +23,24 @@ class Psql:
             self.cursor.execute(command)
         except Exception as err:
             print("ERROR execute:", command, sep='\n', file=sys.stderr)
+            if auto_rollback:
+                self.rollback()
             raise err
 
         if commit:
             self.commit()
 
+    def rollback(self):
+        self.cursor.execute("ROLLBACK;")
+
     def execute_template(self, template: Template,
                          params_template=None,
-                         commit: bool = False):
+                         commit: bool = False,
+                         auto_rollback: bool = False):
         if params_template is None:
             params_template = dict()
 
-        self.execute(template.replace(**params_template), commit)
+        self.execute(template.replace(**params_template), commit, auto_rollback)
 
     def copy(self, file_stream, table, sep=',', columns=None):
         if self.VERBOSE:
