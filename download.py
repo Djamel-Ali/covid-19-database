@@ -1,7 +1,5 @@
 from src import Config, get_infos, save, DIR_NAME, Filler
 
-
-
 if __name__ == "__main__":
     config = Config()
     filler = Filler(config)
