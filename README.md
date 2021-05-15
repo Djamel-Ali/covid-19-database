@@ -24,7 +24,7 @@ Installer pipenv dans votre environnement python global avec la commande :
 ```shell
 $ python -m pip install pipenv
 ```
-(attention à utiliser python3.9)
+(Attention, il faut utiliser **python3.9**)
 
 Pour initialiser l'environnement :
 
@@ -132,6 +132,9 @@ Tout le projet utilise essentiellement SQL, on retrouve tous ces fichiers sql
 dans le dossier [src/templates](src/templates).
 
 De même pour les tests dans [tests/templates](tests/templates).
+
+#### Extensions
+Un fichier portant le nom **\_extentions\_.sql** est disponible dans [src/templates/function](src/templates/function) il contient quelques fonctions mais qui ne sont pas encore utilisées dans cette version.
 
 ### Documents
 - [Rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
