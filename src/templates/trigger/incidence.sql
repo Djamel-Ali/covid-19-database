@@ -2,8 +2,7 @@ CREATE TRIGGER NoAddAlreadyExistIncid
     BEFORE INSERT
     ON Incidence
     FOR EACH ROW
-EXECUTE
-    FUNCTION insert_incidence();
+    EXECUTE PROCEDURE insert_incidence();
 
 -- DELETE ajouté juste par précaution, (mais normalement ce cas
 -- ne devrait pas y arriver, car cela veut dire qu'on avait inséré une entrée
