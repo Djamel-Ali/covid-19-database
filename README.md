@@ -134,11 +134,14 @@ dans le dossier [src/templates](src/templates).
 De même pour les tests dans [tests/templates](tests/templates).
 
 #### Extensions
-Un fichier portant le nom **\_extentions\_.sql** est disponible dans [src/templates/function](src/templates/function) il contient quelques fonctions mais qui ne sont pas encore utilisées dans cette version.
+Un dossier [extension](/extension) est disponible, 
+il contient quelques fonctions mais qui ne sont pas encore utilisées dans cette version.
+
 
 ### Documents
 - [Rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
 - [Rapport final](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
+- [GIT gauffre](https://gaufre.informatique.univ-paris-diderot.fr/alid/covid-19_database)
 
 ### Authors
 - Jéremy DAMOUR
