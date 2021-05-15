@@ -7,7 +7,7 @@ BEGIN
                     AND jour = NEW.Jour) THEN
         RETURN NEW;
     END IF;
-    RAISE NOTICE 'ALREADY EXIST NO INSERT %', NEW;
+    RAISE NOTICE 'ALREADY EXISTS, NO INSERT %', NEW;
     RETURN NULL;
 END
 $$ LANGUAGE plpgsql;

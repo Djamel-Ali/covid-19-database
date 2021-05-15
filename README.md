@@ -24,7 +24,7 @@ Installer pipenv dans votre environnement python global avec la commande :
 ```shell
 $ python -m pip install pipenv
 ```
-(attention à utiliser python3.9)
+(Attention, il faut utiliser **python3.9**)
 
 Pour initialiser l'environnement :
 
@@ -133,9 +133,15 @@ dans le dossier [src/templates](src/templates).
 
 De même pour les tests dans [tests/templates](tests/templates).
 
+#### Extensions
+Un dossier [extension](/extension) est disponible, 
+il contient quelques fonctions mais qui ne sont pas encore utilisées dans cette version.
+
+
 ### Documents
 - [Rapport préliminare](/Documents/rapport_préliminare_JeremyDAMOUR_DjamelALI.pdf)
 - [Rapport final](/Documents/rapport_JeremyDAMOUR_DjamelALI.pdf)
+- [GIT gauffre](https://gaufre.informatique.univ-paris-diderot.fr/alid/covid-19_database)
 
 ### Authors
 - Jéremy DAMOUR

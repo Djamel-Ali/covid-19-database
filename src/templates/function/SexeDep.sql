@@ -10,7 +10,7 @@ BEGIN
             RETURN NEW;
         END IF;
     END IF;
-    RAISE NOTICE 'ALREADY EXIST NO INSERT %', (NEW.*);
+    RAISE NOTICE 'ALREADY EXISTS, NO INSERT %', (NEW.*);
     RETURN NULL;
 END
 $$ LANGUAGE plpgsql;
@@ -46,6 +46,3 @@ BEGIN
     RETURN NULL;
 END
 $$ LANGUAGE plpgsql;
-
-
-
