@@ -17,23 +17,22 @@ CREATE OR REPLACE FUNCTION audit_incid_dc_fun() RETURNS TRIGGER AS $$
 DECLARE
   nb INTEGER;
 BEGIN
-  nb:= NEW.incidDc - OLD.incidDc;
   CASE
 
   WHEN TG_OP='INSERT' THEN
-    IF nb <> 0 THEN -- on ignore (pas de trace pour) les insertions où incidDc = 0
+    IF NEW.incidDc <> 0 THEN -- on ignore (pas de trace pour) les insertions où incidDc = 0
       INSERT INTO audit_incid_dc_tab(numDep, date_dc, description, nombre)
       VALUES (NEW.numDep, CURRENT_DATE, 'NOUVEAUX DC', NEW.incidDc);
     END IF;
 
   WHEN TG_OP='DELETE' THEN
-  IF nb <> 0 THEN -- on ignore (pas de trace pour) les suppression où incidDc = 0
-    INSERT INTO audit_incid_dc_tab(numDep, date_dc, description, nombre)
-    VALUES (OLD.numDep, CURRENT_DATE, 'SUPPRESSION', OLD.incidDc);
+    IF OLD.incidDc <> 0 THEN -- on ignore (pas de trace pour) les suppression où incidDc = 0
+        INSERT INTO audit_incid_dc_tab(numDep, date_dc, description, nombre)
+        VALUES (OLD.numDep, CURRENT_DATE, 'SUPPRESSION', OLD.incidDc);
   END IF;
 
   WHEN TG_OP= 'UPDATE' THEN
-
+    nb:= NEW.incidDc - OLD.incidDc;
     IF nb <> 0 THEN -- on ignore les màj de incidDc = 0
       INSERT INTO audit_incid_dc_tab(numDep, date_dc, description, nombre)
       VALUES (OLD.numDep, OLD.date_dc,
