@@ -146,3 +146,9 @@ il contient quelques fonctions mais qui ne sont pas encore utilisées dans cette
 ### Authors
 - Jéremy DAMOUR
 - Djamel ALI
+
+### License & copyright
+
+© [Jéremy DAMOUR](https://github.com/start974) & [Djamel ALI](https://github.com/DjamelALI), Université de Paris
+
+Licensed under the [MIT License](LICENSE).
